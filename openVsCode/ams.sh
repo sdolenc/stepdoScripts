@@ -8,7 +8,10 @@ if type code >/dev/null 2>&1; then
 
     xblock_path='/edx/app/edxapp/venvs/edxapp/src/azure-media-services'
     if [ ! -d $xblock_path ]; then
-        sudo bash ../install/ams-xblock.sh
+        curr_script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+        pushd $curr_script_path/../install
+        sudo bash ams-xblock.sh
+        popd
     fi
 
     pushd $xblock_path
