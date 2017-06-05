@@ -4,6 +4,9 @@
 
 set -x
 
+# Pre-condition
+sudo apt-get install sshfs
+
 # Configuration. #todo: parameterize this.
 username=lexoxaadmin
 prefix=lexoxabvt
@@ -15,6 +18,5 @@ for dir in "${directories[@]}"; do
     localDir="${HOME}/Desktop/${shortname}_${dir}/"
     mkdir -p "$localDir"
 
-    sudo apt-get install sshfs
     sshfs "${username}@${prefix}${shortname}.${suffix}:/${dir}" "$localDir"
 done
