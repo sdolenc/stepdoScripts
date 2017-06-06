@@ -18,7 +18,7 @@ if type code >/dev/null 2>&1; then
     if [ -d $conf ]; then
         pushd $conf
         directory_path="$HOME/.admincode"
-        sudo code . --user-data-dir="$directory_path/oxa_tools/"
+        sudo code . --user-data-dir="$directory_path/oxa_tools_config/"
         popd
     fi
 
