@@ -15,6 +15,8 @@
 # https://github.com/open-craft/xblock-group-project-v2    \
 # https://github.com/Microsoft/xblock-azure-media-services
 
+set -x
+
 for var in "$@" ; do
     # Update working directory to new location
     if [[ -d "$var" ]] ; then
@@ -25,6 +27,8 @@ for var in "$@" ; do
     # Clone repo
     git clone "$var"
 
-    # Open new repo with vs code
-    code `basename "$var" .git`
+    if [[ $? -eq 0 ]] ; then
+        # Open new repo with vs code
+        code `basename "$var" .git`
+    fi
 done
