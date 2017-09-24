@@ -40,6 +40,10 @@ if type code >/dev/null 2>&1; then
     sudo code . --user-data-dir="$directory_path/edx_ans_conf/"
     popd
 
+    # edx-theme git repository
+    source $CURRENT_SCRIPT_PATH/theme.sh
+    popd
+
     # edx-platform git repository
     source $CURRENT_SCRIPT_PATH/platform.sh
     popd
