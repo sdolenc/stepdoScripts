@@ -53,7 +53,6 @@ if type code >/dev/null 2>&1; then
     popd
 
     source $CURRENT_SCRIPT_PATH/edxapp.sh
-    popd
 
     source $CURRENT_SCRIPT_PATH/ams.sh
     popd
