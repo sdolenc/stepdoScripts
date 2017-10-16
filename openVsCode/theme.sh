@@ -4,19 +4,14 @@
 
 set -xe
 
+#todo: consider adding theme installation if missing (similar to ams.sh)
+
 if type code >/dev/null 2>&1; then
 
-    pushd '/edx/var/edxapp'
+    pushd '/edx/app/edxapp/themes'
     directory_path="$HOME/.admincode"
-    sudo code . --user-data-dir="$directory_path/edx_var_edxapp/"
+    sudo code . --user-data-dir="$directory_path/theme/"
     PS1='\u:\W\$ '
-    popd
-
-    pushd '/edx/app/edxapp'
-    directory_path="$HOME/.admincode"
-    sudo code . --user-data-dir="$directory_path/edx_app_edxapp/"
-    PS1='\u:\W\$ '
-    popd
 
     # Caller is responsible for popd.
     # There are cases when it's useful to stay in this directory.

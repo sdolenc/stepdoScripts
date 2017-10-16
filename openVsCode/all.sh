@@ -24,15 +24,27 @@ EOF"
 #todo: continue splitting into individual files (like w/ ams.sh)
 if type code >/dev/null 2>&1; then
 
+    # fyi: json in edx/app/edxapp
     pushd /edx/app
     git_ignore
     sudo code . --user-data-dir="$directory_path/edx_app/"
     popd
 
+    # important bash scripts
+    pushd /edx/bin
+    sudo code . --user-data-dir="$directory_path/edx_bin/"
+    popd
+
+    # edx-configuration git repository
     pushd /edx/app/edx_ansible/edx_ansible
     sudo code . --user-data-dir="$directory_path/edx_ans_conf/"
     popd
 
+    # edx-theme git repository
+    source $CURRENT_SCRIPT_PATH/theme.sh
+    popd
+
+    # edx-platform git repository
     source $CURRENT_SCRIPT_PATH/platform.sh
     popd
 
@@ -41,7 +53,6 @@ if type code >/dev/null 2>&1; then
     popd
 
     source $CURRENT_SCRIPT_PATH/edxapp.sh
-    popd
 
     source $CURRENT_SCRIPT_PATH/ams.sh
     popd
@@ -49,7 +60,7 @@ if type code >/dev/null 2>&1; then
     # has balancing popd(s) included.
     source $CURRENT_SCRIPT_PATH/oxa.sh
 
-    #todo: future consideration: machine_etc.sh
+    #todo: future consideration: machine_etc.sh for /etc/
 else
     echo "please install vs code"
 fi

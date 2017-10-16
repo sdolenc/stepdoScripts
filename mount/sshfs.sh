@@ -12,7 +12,7 @@ username=lexoxaadmin
 prefix=lexoxabvt
 shortname=c12jb
 suffix=southcentralus.cloudapp.azure.com
-directories=(tmp home oxa)
+directories=(tmp home var usr oxa datadisks)
 
 for dir in "${directories[@]}"; do
     localDir="${HOME}/Desktop/${shortname}_${dir}/"
