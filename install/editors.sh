@@ -7,9 +7,12 @@ sudo apt-get update
 sudo apt-get install -y ubuntu-make
 
 pushd /tmp
+set -x
 
-umake ide pycharm
-umake ide atom
-umake ide visual-studio-code
+destination_prefix=$HOME/.local/share/umake/ide
+
+umake ide pycharm ${destination_prefix}/pycharm
+umake ide atom    ${destination_prefix}/atom
+umake ide visual-studio-code --accept-license ${destination_prefix}/code
 
 popd
