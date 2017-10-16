@@ -27,9 +27,6 @@ popd
 pushd ${destination_prefix}/../bin
 
 # support better binary names
-if [[ ! -f charm ]] && ! type charm > /dev/null 2>&1 ; then
-    ln -s jetbrains-pycharm-ce charm
-fi
 if [[ ! -f pycharm ]] && ! type pycharm > /dev/null 2>&1 ; then
     ln -s jetbrains-pycharm-ce pycharm
 fi
