@@ -41,17 +41,13 @@ fi
 elevated_prof="/etc/environment"
 if ! sudo grep -i -I "umake" $elevated_prof ; then
     # newline
-    sudo sh -c "echo >>                         $elevated_prof"
-    # prefix $PATH variable with current directory
-    sudo sh -c "echo PATH=`pwd`:'"'$PATH'"' >>  $elevated_prof"
-    # preserve successful return code
-    sudo sh -c "echo 'true' >>                  $elevated_prof"
-    # newline
-    sudo sh -c "echo >>                         $elevated_prof"
+    sudo sed -i "s#=\"#=\"`pwd`:#" $elevated_prof
 fi
 
 popd
 
+set +x
+echo
 echo "PATH variable will be updated upon reboot"
 echo "Allowing 'pycharm, code, and atom' from console terminal"
 echo
