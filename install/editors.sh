@@ -2,6 +2,11 @@
 
 set -xe
 
+if [[ $USER == root ]] ; then
+    echo "Please re-run as regular user (non-admin)"
+    return false
+fi
+
 # packages
 sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 sudo apt-get update
@@ -21,15 +26,28 @@ popd
 
 pushd ${destination_prefix}/../bin
 
-# use better binary names
-if ! type charm > /dev/null 2>&1 ; then
+# support better binary names
+if [[ ! -f charm ]] && ! type charm > /dev/null 2>&1 ; then
     ln -s jetbrains-pycharm-ce charm
 fi
-if ! type pycharm > /dev/null 2>&1 ; then
+if [[ ! -f pycharm ]] && ! type pycharm > /dev/null 2>&1 ; then
     ln -s jetbrains-pycharm-ce pycharm
 fi
-if ! type code > /dev/null 2>&1 ; then
+if [[ ! -f code ]] && ! type code > /dev/null 2>&1 ; then
     ln -s visual-studio-code code
+fi
+
+# allow root to "see" the same binaries in "path"
+elevated_prof="/root/.profile"
+if ! sudo grep -i -I "umake" $elevated_prof ; then
+    # newline
+    sudo sh -c "echo >>                         $elevated_prof"
+    # prefix $PATH variable with current directory
+    sudo sh -c "echo PATH=`pwd`:'"'$PATH'"' >>  $elevated_prof"
+    # preserve successful return code
+    sudo sh -c "echo 'true' >>                  $elevated_prof"
+    # newline
+    sudo sh -c "echo >>                         $elevated_prof"
 fi
 
 popd
