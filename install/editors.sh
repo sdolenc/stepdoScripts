@@ -38,7 +38,7 @@ if [[ ! -f code ]] && ! type code > /dev/null 2>&1 ; then
 fi
 
 # allow root to "see" the same binaries in "path"
-elevated_prof="/root/.profile"
+elevated_prof="/etc/environment"
 if ! sudo grep -i -I "umake" $elevated_prof ; then
     # newline
     sudo sh -c "echo >>                         $elevated_prof"
